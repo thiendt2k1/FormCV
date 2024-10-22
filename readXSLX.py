@@ -8,7 +8,7 @@ from flask import *
 from flask_cors import CORS
 from logging import FileHandler,WARNING
 
-app = Flask(__name__, template_folder = 'C:/Users/Administrator/Desktop/')
+app = Flask(__name__, template_folder = 'C:/Users/Administrator/Desktop/CV/Form')
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
 CORS(app)

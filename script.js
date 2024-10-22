@@ -14,7 +14,7 @@
 
 
   window.onload = function() {
-    fetch('http://127.0.0.1:5000/get-tenVT',{
+    fetch('http://127.0.0.1:8000/get-tenVT',{
         method: 'GET',
         headers: {
         accept: 'application/json',
@@ -43,7 +43,7 @@ function fetchMaVTandDVT() {
     const tenVT = document.getElementById('tenVT').value;
     console.log(tenVT)
     if (tenVT) {
-        fetch(`http://127.0.0.1:5000/get-mavt-dvt?tenVT=${encodeURIComponent(tenVT)}`, {
+        fetch(`http://127.0.0.1:8000/get-mavt-dvt?tenVT=${encodeURIComponent(tenVT)}`, {
             method: 'GET',
             headers: {
             accept: 'application/json'
