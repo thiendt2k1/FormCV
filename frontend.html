@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .form-section {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="text-center">Inventory Form</h2>
+    <form id="inventoryForm" novalidate>
+
+      <!-- STT (Auto-Incremented) -->
+      <div class="form-section">
+        <label for="stt">STT</label>
+        <input type="number" class="form-control" id="stt" value="1">
+      </div>
+
+      <!-- Tên VT (Searchable Dropdown) -->
+      <div class="form-section">
+        <label for="tenVT">Tên VT</label>
+        <select class="form-control" id="tenVT" required onchange="fetchMaVTandDVT()"></select>
+          <!-- <option value="" disabled selected>Select Material</option> -->
+          <!-- Add more options dynamically if needed -->
+        </select>
+        <div class="invalid-feedback">Please select a material.</div>
+      </div>
+
+      <!-- Mã VT (Queried when Tên VT is selected) -->
+      <div class="form-section">
+        <label for="maVT">Mã VT</label>
+        <input type="text" class="form-control" id="maVT" readonly>
+      </div>
+
+      <!-- DVT (Queried when Tên VT is selected) -->
+      <div class="form-section">
+        <label for="dvt">DVT</label>
+        <input type="text" class="form-control" id="dvt" readonly>
+      </div>
+
+      <!-- Nhập (Float) -->
+      <div class="form-section">
+        <label for="nhap">SL nhập (bỏ qua nếu không xuất)</label>
+        <input type="number" class="form-control" id="nhap" placeholder="0.00" step="0.01">
+        <div class="invalid-feedback">Please enter a valid amount.</div>
+      </div>
+
+      <!-- Xuất (Float) -->
+      <div class="form-section">
+        <label for="xuat">SL xuất(bỏ qua nếu không xuất)</label>
+        <input type="number" class="form-control" id="xuat" placeholder="0.00" step="0.01">
+        <div class="invalid-feedback">Vui lòng chọn số lượng xuất</div>
+      </div>
+
+      <!-- Ngày nhập (Auto-fill) -->
+      <div class="form-section">
+        <label for="ngayNhap">Ngày nhập</label>
+        <input type="datetime-local" class="form-control" id="ngayNhap" required>
+      </div>
+
+      <!-- Người nhập (Dropdown) -->
+      <div class="form-section">
+        <label for="nguoiNhap">Người nhập</label>
+        <select class="form-control" id="nguoiNhap" required>
+          <option value="" disabled selected>Người nhập</option>
+          <option value="person1">Nguyen Van Huy</option>
+          <option value="person2">Nguyen Van A</option>
+        </select>
+        <div class="invalid-feedback">Chọn người nhập.</div>
+      </div>
+
+      <!-- Người xuất (Dropdown) -->
+      <div class="form-section">
+        <label for="nguoiXuat">Người xuất</label>
+        <select class="form-control" id="nguoiXuat" required>
+          <option value="" disabled selected>Chọn người</option>
+          <option value="person1">Nguyen Van Huy</option>
+          <option value="person2">Nguyen Van A</option>
+        </select>
+        <div class="invalid-feedback">Vui lòng chọn người xuất.</div>
+      </div>
+
+      <!-- Số lô - Mã kho (Text input) -->
+      <div class="form-section">
+        <label for="soLo">Số lô - Mã kho</label>
+        <input type="text" class="form-control" id="soLo" minlength="3" placeholder="Nếu NVL nhập NVL" required>
+        <div class="invalid-feedback">Số lô - Mã kho phải có từ 3 kí tự trở lên</div>
+      </div>
+
+      <!-- Chứng từ mua (Image Upload to Imgbb) -->
+      <div class="form-section">
+        <label for="chungTuMua">Hình ảnh mặt hàng</label>
+        <input type="file" class="form-control-file" id="chungTuMua" accept="image/*" onchange="uploadImage()" required>
+        <input type="hidden" id="imgbbUrl">
+        <div class="invalid-feedback">Vui lòng chọn ảnh chứng từ</div>
+      </div>
+
+      <!-- Tình trạng (Dropdown with option to add new) -->
+      <div class="form-section">
+        <label for="tinhTrang">Tình trạng</label>
+        <select class="form-control" id="tinhTrang" required>
+          <option value="" disabled selected>Select Status</option>
+          <option value="OK">Đạt chuẩn</option>
+          <option value="ReturnNoPass">Hàng không đạt cần trả lại</option>
+          <option value="Damaged">Hàng hỏng</option>
+          <option value="custom">Thêm khác</option>
+        </select>
+        <div class="invalid-feedback">Vui lòng chọn tình trạng.</div>
+      </div>
+
+      <!-- Ghi chú (Text input) -->
+      <div class="form-section">
+        <label for="ghiChu">Ghi chú</label>
+        <textarea class="form-control" id="ghiChu" rows="3" placeholder="Ghi chú nếu có"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+  </div>
+
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Include jQuery (needed for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://www.dropbox.com/scl/fi/qwvq0zbns9sipbou7tq0d/script.js?rlkey=7v75nsjhuuy9pish1h88ltvum&st=jcjuvr5g&dl=1"></script>
+  <!-- <script src="script.js"></script> -->
+</body>
+</html>
