@@ -123,3 +123,17 @@ function fetchMaVTandDVT() {
         alert('Gửi không thành công, vui lòng thử lại.'); // Alert on failure
     });
 }
+
+document.getElementById('tinhTrang').addEventListener('change', function () {
+  const customOption = document.getElementById('tinhTrang').value === 'custom';
+  const customField = document.getElementById('customTinhTrangField');
+  
+  // Show or hide the custom input field based on the selection
+  if (customOption) {
+      customField.style.display = 'block'; // Show the input field
+      document.getElementById('customTinhTrang').setAttribute('required', true); // Make custom input required
+  } else {
+      customField.style.display = 'none'; // Hide the input field
+      document.getElementById('customTinhTrang').removeAttribute('required'); // Remove the required attribute
+  }
+});
