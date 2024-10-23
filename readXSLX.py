@@ -122,5 +122,9 @@ def save():
     # Return a success response with the updated dataframe
     return jsonify({'message': 'Form data received', 'data': masterSheet.to_dict(orient='records')})
 
+@app.route('/js', methods=['GET'])
+def serve_js():
+    return send_file(r"C:\Users\Administrator\Desktop\CV\Form\script.js", mimetype='application/javascript')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8000)
