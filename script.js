@@ -114,11 +114,13 @@ function fetchMaVTandDVT() {
         nhap: document.getElementById('nhap').value,
         nguoiNhap: document.getElementById('nguoiNhap').value,
         nguoiXuat: document.getElementById('nguoiXuat').value,
+        ngayXuat: document.getElementById('ngayXuat').value,
         soLo: document.getElementById('soLo').value,
         nhap: document.getElementById('nhap').value,
         imgURL: document.getElementById('imgbbUrl').value,
         tinhTrang: document.getElementById('tinhTrang').value,
-        ghiChu: document.getElementById('ghiChu').value        
+        ghiChu: document.getElementById('ghiChu').value,
+        
         // Add other fields as needed
     };
 
@@ -152,5 +154,30 @@ document.getElementById('tinhTrang').addEventListener('change', function () {
   } else {
       customField.style.display = 'none'; // Hide the input field
       document.getElementById('customTinhTrang').removeAttribute('required'); // Remove the required attribute
+  }
+});
+
+document.getElementById('nhap').addEventListener('change', function() {
+  const nguoiNhap = document.getElementById('nguoiNhap');
+  const ngayNhap = document.getElementById('ngayNhap');
+  if (this.value) {
+    nguoiNhap.required = true;
+    ngayNhap.required = true;
+  } else {
+    nguoiNhap.required = false;
+    ngayNhap.required = false;
+  }
+});
+
+// Similar code for xuat (SL xuất) field
+document.getElementById('xuat').addEventListener('change', function() {
+  const nguoiXuat = document.getElementById('nguoiXuat');
+  const ngayXuat = document.getElementById('ngayXuat');
+  if (this.value) {
+    nguoiXuat.required = true;
+    ngayXuat.required = true; // typo fixed (should be ngayXuat)
+  } else {
+    nguoiXuat.required = false;
+    ngayXuat.required = false;
   }
 });

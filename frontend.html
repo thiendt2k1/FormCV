@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventory Form</title>
   <!-- Bootstrap CSS -->
-  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       padding: 20px;
@@ -66,7 +66,7 @@
       <!-- Ngày nhập (Auto-fill) -->
       <div class="form-section">
         <label for="ngayNhap">Ngày nhập</label>
-        <input type="datetime-local" class="form-control" id="ngayNhap" required>
+        <input type="datetime-local" class="form-control" id="ngayNhap">
       </div>
 
       <!-- Người nhập (Dropdown) -->
@@ -89,6 +89,11 @@
           <option value="person2">Nguyen Van A</option>
         </select>
         <div class="invalid-feedback">Vui lòng chọn người xuất.</div>
+      </div>
+
+      <div class="form-section">
+        <label for="ngayXuat">Ngày nhập</label>
+        <input type="datetime-local" class="form-control" id="ngayXuat">
       </div>
 
       <!-- Số lô - Mã kho (Text input) -->
