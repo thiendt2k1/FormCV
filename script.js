@@ -31,7 +31,7 @@
   })();
 
   window.onload = function() {
-    fetch('http://127.0.0.1:8000/get-tenVT',{
+    fetch('http://192.168.111.19:8000/get-tenVT',{
         method: 'GET',
         headers: {
         accept: 'application/json',
@@ -60,7 +60,7 @@ function fetchMaVTandDVT() {
     const tenVT = document.getElementById('tenVT').value;
     console.log(tenVT)
     if (tenVT) {
-        fetch(`http://127.0.0.1:8000/get-mavt-dvt?tenVT=${encodeURIComponent(tenVT)}`, {
+        fetch(`http://192.168.111.19:8000/get-mavt-dvt?tenVT=${encodeURIComponent(tenVT)}`, {
             method: 'GET',
             headers: {
             accept: 'application/json'
@@ -82,8 +82,9 @@ function fetchMaVTandDVT() {
         document.getElementById('dvt').value = "";
     }
 }
-  // Auto-fill Ngày nhập
+  // Auto-fill Ngày nhập, xuất
   document.getElementById('ngayNhap').value = new Date().toISOString().slice(0, 16);
+  document.getElementById('ngayXuat').value = new Date().toISOString().slice(0, 16);
 
   // Upload image to Imgbb
   function uploadImage() {
@@ -125,7 +126,7 @@ function fetchMaVTandDVT() {
     };
 
     // Convert form data to JSON and send as GET request
-    fetch('http://127.0.0.1:8000/nhapkho', {
+    fetch('http://192.168.111.19:8000/nhapkho', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
