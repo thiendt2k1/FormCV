@@ -112,5 +112,17 @@ def get_mavt_and_dvt():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/nhapkho', methods=['POST'])
+def save():
+    data = request.get_json()
+
+    # Append the new data into the DataFrame
+    global masterSheet
+    masterSheet = masterSheet.append(data, ignore_index=True)
+
+    # Return a success response with the updated dataframe
+    return jsonify({'message': 'Form data received', 'data': masterSheet.to_dict(orient='records')})
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
