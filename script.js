@@ -3,15 +3,32 @@
     window.addEventListener('load', function() {
       var form = document.getElementById('inventoryForm');
       form.addEventListener('submit', function(event) {
+        // if (form.checkValidity() === false) {
+        //   event.preventDefault();
+        //   event.stopPropagation();
+        // }
         if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
+          // If invalid, show validation feedback
+          form.classList.add('was-validated');
+        } 
+        else {
+          // If valid, show validation feedback
+          form.classList.add('was-validated');
+          alert('Đã nộp. Kéo xuống để nộp tiếp.')
+          // Optionally, you can provide an additional prompt or button for reloading:
+          const reloadButton = document.createElement('button');
+          reloadButton.textContent = "Reload Page";
+          reloadButton.classList.add('btn', 'btn-primary'); // Optional: Bootstrap styling
+          reloadButton.addEventListener('click', function() {
+              location.reload(); // Manually reload the page when the button is clicked
+          });
+  
+          document.body.appendChild(reloadButton); // Append button to the page
+      }
+        // form.classList.add('was-validated');
       }, false);
     }, false);
   })();
-
 
   window.onload = function() {
     fetch('http://127.0.0.1:8000/get-tenVT',{
@@ -106,7 +123,7 @@ function fetchMaVTandDVT() {
     };
 
     // Convert form data to JSON and send as GET request
-    fetch('192.168.60.102:8000//nhapkho', {
+    fetch('http://127.0.0.1:8000/nhapkho', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

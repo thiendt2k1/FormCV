@@ -103,7 +103,6 @@ def get_mavt_and_dvt():
         ten_vt = request.args.get('tenVT', "")
         # Filter the DataFrame to find the matching row
         row = masterSheet[masterSheet['Tên vật tư'] == ten_vt].iloc[0]
-        print(row)
         # Return the corresponding MaVT and DVT as JSON
         return jsonify({'MaVT': row['Mã VT'], 'DVT': row['Đơn \nvị']}), 200
 
@@ -119,10 +118,9 @@ def save():
     # Append the new data into the DataFrame
     global masterSheet
     masterSheet = masterSheet.append(data, ignore_index=True)
-
+    print("masterSheet", masterSheet)
     # Return a success response with the updated dataframe
     return jsonify({'message': 'Form data received', 'data': masterSheet.to_dict(orient='records')})
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', debug=True, port=8000)
