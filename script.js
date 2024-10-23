@@ -106,7 +106,7 @@ function fetchMaVTandDVT() {
     };
 
     // Convert form data to JSON and send as GET request
-    fetch('192.168.60.102://nhapkho', {
+    fetch('192.168.60.102:8000//nhapkho', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
